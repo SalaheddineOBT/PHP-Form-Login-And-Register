@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     text-decoration: none;
-    transition: .6s linear;
+    transition: all .6s linear;
     box-sizing: border-box;
     outline: none;
     text-transform: capitalize;
@@ -45,7 +45,6 @@
     font-weight: 700;
     color: #0B4F5F;
     padding:.5rem;
-    margin-top: .5rem;
     padding-left: .8rem;
     text-align: left;
 }
@@ -227,11 +226,20 @@ nav a:hover::before{
     background:rgba(255, 255, 255, 0.459) ;
 }
 .homecontainer span{
-    color: aqua;
+    color:#092f42fa;
 }
 .error{
     color: red;
     text-align: left;
     padding-left: 1rem;
     padding-top: .5rem;
+}
+.er{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    background: red;
+    width: 35%;
+    padding:1rem;
 }

@@ -1,7 +1,8 @@
 <?php
 
-    //connect to the database
+    //connect to the database db1
     $conn=mysqli_connect('localhost','Salaheddine','Salah2001','db1');
+    session_start();
 
     //check connection
 
@@ -21,22 +22,9 @@
     //free result from memory :
     mysqli_free_result($result);
 
-    //close connection :
-    mysqli_close($conn);
-
     // print_r($users);
 
-    // query Insert
-    // function Inscreption($usernam,$email,$pass){
-    //     $sql='INSERT INTO users VALUES()';
-
-    // }
-
-    function Connecting($UsNm,$Pass){
-        $query='SELECT * FROM users WHERE UserName="'.$UsNm.'" AND Password="'.$Pass.'"';
-        $res=mysqli_query($conn,$query);
-
-        if()
-    }
+    // //close connection :
+    // mysqli_close($conn);
 
 ?>

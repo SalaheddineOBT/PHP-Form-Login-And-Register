@@ -1,5 +1,17 @@
 <?php
+    include "PageSQL.php";
 
+    if(empty($_SESSION["userName"])){
+        header("Location:connexion.php");
+    }
+    $user=$_SESSION["userName"];
+
+    $sql="select * from users where Email='$user' limit 1";
+    $resultg=mysqli_query($conn,$sql);
+
+    if(mysqli_num_rows($resultg)==1){
+        $users=mysqli_fetch_all($resultg,MYSQLI_ASSOC);
+        foreach($users as $k){
 ?>
 
 <!DOCTYPE html>
@@ -17,72 +29,24 @@
         <div class="logo">
             <img src="images/logo.png" alt="logo">
         </div>
-        <a href="connexion.php">Diconnexion ?</a>
+        <a href="logout.php">logout ?</a>
     </nav>
     <div class="homecontainer">
         <div class="text">
             <h2>Hello</h2><br>
-            <h1>Welcom in this Home page<br><span>hermano</span></h1>
-            <?php
-        include("PageSQL.php");
-    ?>
-    
-    <div>
-        <table border="1">
-          <tr>
-            <th>ID</th>
-            <th>USER NAME</th>
-            <th>EMAIL</th>
-            <th>PASSWORD</th>
-            <th>DATE DE CREATION</th>
-          </tr>
-          <?php
-            foreach($users as $key){
-
-        ?>
-        
-        <tr>
-            <td>
-                <?php
-                    echo htmlspecialchars($key['ID']);
-                ?>
-            </td>
-            <td>
-            <?php
-                    echo htmlspecialchars($key['UserName']);
-                ?>
-            </td>
-            <td>
-            <?php
-                    echo htmlspecialchars($key['Email']);
-                ?>
-            </td>
-            <td>
-            <?php
-                    echo htmlspecialchars($key['Password']);
-                ?>
-            </td>
-            <td>
-            <?php
-                    echo htmlspecialchars($key['Created']);
-                ?>
-            </td>
-        </tr>
-
-        <?php
-                
-            }
-          ?>
-        </table>
-    </div>
+            <h1>Welcom in Home page<br><span><?php echo $k["UserName"];  ?></span></h1>
         </div>
     </div>
-
     <div class="footr" style="text-align:center;position: absolute;bottom: 0;left: 0;background: rgba(138, 165, 240, 0.54);width: 100%;padding:.5rem;">
-        <h2>&copy; 2020 - <?php echo date("Y"); ?> | salaheddine</h2>
+        <h3>&copy; 2020 - <?php echo date("Y"); ?> | salaheddine</h3>
     </div>
 
-
+    <?php
+        }
+    }
+        // session_unset();
+        // session_destroy();
+    ?>
 
 </body>
 </html>

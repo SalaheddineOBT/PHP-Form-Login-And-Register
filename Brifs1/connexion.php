@@ -10,19 +10,26 @@
             $errors["email"]="Email is required !!!";
         }else{
             $user=htmlspecialchars($_POST["username"]);
-            if(!filter_var($user,FILTER_VALIDATE_EMAIL)){
-                $errors["email"]="Invalide Email Adresse !!!";
-            }
         }
             
         if(empty($_POST["password"])){
             $errors["password"]="password is required !!!";
         }else{
             $pass=htmlspecialchars($_POST["password"]);
+            $passsh=md5($pass);
         }
 
         if(!array_filter($errors)){ /// empty array return false else the array is not empty then return false . 
-            header("Location:home.php");
+            include("PageSQL.php");
+            $query="select * from users where Email='$user' and Password='$passsh' limit 1";
+            $resultat=mysqli_query($conn,$query);
+            if(mysqli_num_rows($resultat)==1)
+            {
+                header("Location:home.php");
+                $_SESSION["userName"]=$user;
+            }                
+            else
+                echo '<h2 class="er">User Name Or Password incorrect !!!</h2>';
         }
 
     }
@@ -37,7 +44,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
 
@@ -54,12 +60,6 @@
             <input type="submit" name="submite" id="btnsub" value="Connexion" />
         </form>
     </div>
-
-
-    <?php
-        include("PageSQL.php");
-    ?>
-
 
 </body>
 </html>

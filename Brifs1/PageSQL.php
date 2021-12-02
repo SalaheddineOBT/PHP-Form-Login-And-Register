@@ -1,7 +1,7 @@
 <?php
 
     //connect to the database db1
-    $conn=mysqli_connect('localhost','Salaheddine','Salah2001','db1');
+    $conn=mysqli_connect('localhost','root','','db1');
     session_start();
 
     //check connection
